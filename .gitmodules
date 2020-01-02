@@ -1,0 +1,3 @@
+[submodule "cooking"]
+	path = cooking
+	url = https://github.com/cortl/cooking.git
