@@ -24,7 +24,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `standalone`,
-        icon: `src/images/chef.png`
+        icon: `src/images/chef.png`,
       },
     },
     `gatsby-plugin-offline`,
