@@ -89,6 +89,10 @@ img {
   border-style: none;
 }
 
+.gatsby-image-wrapper {
+  margin-bottom: 1.45rem;
+}
+
 svg:not(:root) {
   overflow: hidden;
 }

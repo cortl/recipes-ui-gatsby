@@ -5,6 +5,7 @@ exports.createPages = async function({ actions, graphql }) {
         nodes {
           ingredients
           instructions
+          image
           slug
           notes
           title
@@ -17,7 +18,6 @@ exports.createPages = async function({ actions, graphql }) {
   data.allRecipesJson.nodes
     .filter(node => Boolean(node.slug))
     .forEach(node => {
-      console.log(node.slug)
       actions.createPage({
         path: `recipes/${node.slug}`,
         component: require.resolve(`./src/templates/recipe.js`),
