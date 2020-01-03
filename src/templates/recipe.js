@@ -51,7 +51,7 @@ export const query = graphql`
 query($image: String) {
     placeholderImage: file(relativePath: { eq: $image }) {
       childImageSharp {
-        fluid(maxWidth: 600) {
+        fluid(maxWidth: 960, maxHeight: 600) {
           ...GatsbyImageSharpFluid
         }
       }
