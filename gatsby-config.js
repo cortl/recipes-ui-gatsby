@@ -19,11 +19,11 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Recipe Book`,
-        short_name: `recipes`,
+        short_name: `Recipes`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
-        display: `minimal-ui`,
+        display: `standalone`,
         icon: `src/images/chef.png`
       },
     },

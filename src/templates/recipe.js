@@ -19,7 +19,7 @@ export default ({pageContext}) => {
             <ul>
                 {
                     pageContext.ingredients.map(ingredient => (
-                        <li key={ingredient.name}>{`${ingredient.quantity} ${ingredient.name}`}</li>
+                        <li key={ingredient}>{ingredient}</li>
                     ))
                 }
             </ul>

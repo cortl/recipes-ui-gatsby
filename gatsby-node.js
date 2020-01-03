@@ -3,10 +3,7 @@ exports.createPages = async function ({actions, graphql}) {
     {
         allRecipesJson {
             nodes {
-            ingredients {
-                name
-                quantity
-            }
+            ingredients
             instructions
             slug
             notes
