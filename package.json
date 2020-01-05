@@ -22,11 +22,18 @@
   },
   "devDependencies": {
     "firebase-tools": "^7.11.0",
-    "prettier": "^1.19.1"
+    "husky": "^3.1.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1"
   },
   "keywords": [
     "gatsby"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --pattern \"src/**/*.js\""
+    }
+  },
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
