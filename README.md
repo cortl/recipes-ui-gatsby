@@ -6,7 +6,7 @@ This is a gatsby view of [this project](https://github.com/cortl/cooking)
 
 ## Roadmap
 
-- ⬜ Make the search a little more fuzzy
+- ✅ Make the search a little more fuzzy
 - ⬜ Fonts - bigger, better
 - ⬜ Night mode
 - ⬜ Pictures for categories?
