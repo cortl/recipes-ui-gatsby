@@ -6,7 +6,7 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import Search from "../components/search"
 
-const toSearch = ({slug, title, rating, ingredients}) => ({
+const toSearch = ({ slug, title, rating }) => ({
   url: `recipes/${slug}`,
   key: title,
   title,
@@ -40,13 +40,6 @@ const IndexPage = () => {
       >
         <Image />
       </div>
-      <h1>Hi!</h1>
-      <p>
-        This website is a personal collection of the recipes I've made over my
-        journey of amateur cooking. I've ranked each recipe, included notes, and
-        the original source.
-      </p>
-      <h2>Recipes</h2>
       <Search data={data.allRecipesJson.nodes.map(toSearch)} />
     </Layout>
   )
