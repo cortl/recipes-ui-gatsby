@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import "./layout.css"
 import "tachyons-sass/tachyons.scss"
 
 const Layout = ({ children }) => {
@@ -19,7 +20,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="w-100 bg-white">
+      <div className="w-100 bg-white geneva">
         <main className="w-80-l w-100 pa2 center">{children}</main>
         <footer></footer>
       </div>
