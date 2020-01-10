@@ -20,7 +20,7 @@ const Recipe = ({ data, pageContext }) => {
         <Img fluid={data.placeholderImage.childImageSharp.fluid} />
       )}
       {pageContext.notes.filter(Boolean).length ? (
-        <section>
+        <section className="bb">
           <h2>{`Notes`}</h2>
           <ul>
             {pageContext.notes.map((note, i) => (
@@ -33,7 +33,7 @@ const Recipe = ({ data, pageContext }) => {
       ) : (
         <></>
       )}
-      <section>
+      <section className="bb">
         <h2>{`Ingredients`}</h2>
         <ul>
           {pageContext.ingredients.map((ingredient, i) => (
@@ -43,12 +43,12 @@ const Recipe = ({ data, pageContext }) => {
           ))}
         </ul>
       </section>
-      <section className="lh-copy">
+      <section className="bb" className="">
         <h2>{`Instructions`}</h2>
         <ol>
           {pageContext.instructions.map((instruction, i) => (
             <li className="pv2" key={`instruction${i}`}>
-              {instruction}
+              <span className="lh-copy">{instruction}</span>
             </li>
           ))}
         </ol>
