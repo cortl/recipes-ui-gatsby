@@ -5,6 +5,48 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 
+const notes = ({ notes }) =>
+  notes.filter(Boolean).length ? (
+    <section className="bb">
+      <h2>{`Notes`}</h2>
+      <ul>
+        {notes.map((note, i) => (
+          <li className="pv2" key={`notes${i}`}>
+            {note}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : (
+    <></>
+  )
+
+const ingredients = ({ ingredients }) => (
+  <section className="bb">
+    <h2>{`Ingredients`}</h2>
+    <ul>
+      {ingredients.map((ingredient, i) => (
+        <li className="pv2" key={`${i}ingredient`}>
+          {ingredient}
+        </li>
+      ))}
+    </ul>
+  </section>
+)
+
+const instructions = ({ instructions }) => (
+  <section className="bb" className="">
+    <h2>{`Instructions`}</h2>
+    <ol>
+      {instructions.map((instruction, i) => (
+        <li className="pv2" key={`instruction${i}`}>
+          <span className="lh-copy">{instruction}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+)
+
 const Recipe = ({ data, pageContext }) => {
   return (
     <Layout>
@@ -17,42 +59,17 @@ const Recipe = ({ data, pageContext }) => {
         </a>
       </h4>
       {data.placeholderImage && (
-        <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+        <Img
+          imgStyle={{
+            objectFit: "contain",
+            objectPosition: "center center",
+          }}
+          fluid={data.placeholderImage.childImageSharp.fluid}
+        />
       )}
-      {pageContext.notes.filter(Boolean).length ? (
-        <section className="bb">
-          <h2>{`Notes`}</h2>
-          <ul>
-            {pageContext.notes.map((note, i) => (
-              <li className="pv2" key={`notes${i}`}>
-                {note}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : (
-        <></>
-      )}
-      <section className="bb">
-        <h2>{`Ingredients`}</h2>
-        <ul>
-          {pageContext.ingredients.map((ingredient, i) => (
-            <li className="pv2" key={`${i}ingredient`}>
-              {ingredient}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="bb" className="">
-        <h2>{`Instructions`}</h2>
-        <ol>
-          {pageContext.instructions.map((instruction, i) => (
-            <li className="pv2" key={`instruction${i}`}>
-              <span className="lh-copy">{instruction}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
+      {notes(pageContext)}
+      {ingredients(pageContext)}
+      {instructions(pageContext)}
     </Layout>
   )
 }
@@ -61,7 +78,7 @@ export const query = graphql`
   query($image: String) {
     placeholderImage: file(relativePath: { eq: $image }) {
       childImageSharp {
-        fluid(maxWidth: 960, maxHeight: 600) {
+        fluid(maxWidth: 960, maxHeight: 400) {
           ...GatsbyImageSharpFluid
         }
       }

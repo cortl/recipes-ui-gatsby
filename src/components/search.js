@@ -40,7 +40,7 @@ export default class Search extends Component {
           />
         </div>
       </form>
-      <ul class="list pl0 center br bl w-70-l w-100">
+      <ul className="list pl0 center br bl w-70-l w-100">
         {this.state.items.map((item, i) => {
           const className = `dim ph3 pv3 bb ${i === 0 ? "bt" : ""}`
           return (
