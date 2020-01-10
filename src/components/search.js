@@ -42,8 +42,7 @@ export default class Search extends Component {
       </form>
       <ul class="list pl0 center br bl w-70-l w-100">
         {this.state.items.map((item, i) => {
-          const length = this.state.items.length
-          const className = `ph3 pv3 bb ${i === 0 ? "bt" : ""}`
+          const className = `dim ph3 pv3 bb ${i === 0 ? "bt" : ""}`
           return (
             <Link to={item.url} className="link black">
               <li key={`${i}${item.title}`} className={className}>
