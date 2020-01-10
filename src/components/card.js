@@ -1,17 +1,19 @@
 import React from "react"
-
-import "./card.css"
 import { Link } from "gatsby"
 
+import "./card.css"
+
 const Card = ({ title, link, children }) => {
-    return (
-        <Link to={link}>
-            <div className='card'>
-                <h5>{title}</h5>
-                {children}
-            </div>
-        </Link>
-    );
+  return (
+    <div className="w-100 w-50-m w-third-l dib">
+      <Link to={link} className="link black">
+        <div className="card outline pa3 ma2-l ma2-m mb3">
+          <h5>{title}</h5>
+          {children}
+        </div>
+      </Link>
+    </div>
+  )
 }
 
 export default Card
