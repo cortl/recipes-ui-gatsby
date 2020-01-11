@@ -5,7 +5,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Img from 'gatsby-image';
 
-const SECTION_STYLE = 'bb w-80-l center';
+const SECTION_STYLE = 'w-80-l center';
 
 const notes = ({notes}) =>
 	notes.filter(Boolean).length ? (
@@ -50,21 +50,26 @@ const instructions = ({instructions}) => (
 );
 
 const Recipe = ({data, pageContext}) => {
+	const HALF = 'w-100 w-50-l dib v-mid';
 	return (
 		<Layout>
 			<SEO title={pageContext.title} />
-			<h1 className='lh-title'>{`${pageContext.title} - ${pageContext.rating}/10`}</h1>
-			<h4>
-				{`Adapted from `}
-				<a className='black dim' href={pageContext.source}>
-					here
-				</a>
-			</h4>
-			{data.placeholderImage && (
-				<div className='h-25-l'>
-					<Img fluid={data.placeholderImage.childImageSharp.fluid} />
+			<section className={SECTION_STYLE}>
+				<div className={`${HALF}`}>
+					<h1 className='lh-title'>{`${pageContext.title} - ${pageContext.rating}/10`}</h1>
+					<h4>
+						{`Adapted from `}
+						<a className='black dim' href={pageContext.source}>
+							here
+						</a>
+					</h4>
 				</div>
-			)}
+				<div className={HALF}>
+					{data.placeholderImage && (
+						<Img fluid={data.placeholderImage.childImageSharp.fluid} />
+					)}
+				</div>
+			</section>
 			{notes(pageContext)}
 			{ingredients(pageContext)}
 			{instructions(pageContext)}
@@ -76,7 +81,7 @@ export const query = graphql`
 	query($image: String) {
 		placeholderImage: file(relativePath: {eq: $image}) {
 			childImageSharp {
-				fluid(maxWidth: 960, maxHeight: 400) {
+				fluid(maxWidth: 960, maxHeight: 960) {
 					...GatsbyImageSharpFluid
 				}
 			}
