@@ -20,8 +20,8 @@ const Layout = ({children}) => {
 	return (
 		<>
 			<Header siteTitle={data.site.siteMetadata.title} />
-			<div className='w-100 bg-white geneva'>
-				<main className='w-80-l w-100 pa2 center'>{children}</main>
+			<div className='w-100 bg-white helvetica'>
+				<main className='w-50-l w-100 pa2 center'>{children}</main>
 				<footer></footer>
 			</div>
 		</>

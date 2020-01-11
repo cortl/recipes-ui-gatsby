@@ -5,9 +5,11 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Img from 'gatsby-image';
 
+const SECTION_STYLE = 'bb w-80-l center';
+
 const notes = ({notes}) =>
 	notes.filter(Boolean).length ? (
-		<section className='bb'>
+		<section className={SECTION_STYLE}>
 			<h2>{`Notes`}</h2>
 			<ul>
 				{notes.map((note, i) => (
@@ -22,7 +24,7 @@ const notes = ({notes}) =>
 	);
 
 const ingredients = ({ingredients}) => (
-	<section className='bb'>
+	<section className={SECTION_STYLE}>
 		<h2>{`Ingredients`}</h2>
 		<ul>
 			{ingredients.map((ingredient, i) => (
@@ -35,7 +37,7 @@ const ingredients = ({ingredients}) => (
 );
 
 const instructions = ({instructions}) => (
-	<section className='bb'>
+	<section className={SECTION_STYLE}>
 		<h2>{`Instructions`}</h2>
 		<ol>
 			{instructions.map((instruction, i) => (
@@ -59,13 +61,9 @@ const Recipe = ({data, pageContext}) => {
 				</a>
 			</h4>
 			{data.placeholderImage && (
-				<Img
-					imgStyle={{
-						objectFit: 'contain',
-						objectPosition: 'center center',
-					}}
-					fluid={data.placeholderImage.childImageSharp.fluid}
-				/>
+				<div className='h-25-l'>
+					<Img fluid={data.placeholderImage.childImageSharp.fluid} />
+				</div>
 			)}
 			{notes(pageContext)}
 			{ingredients(pageContext)}

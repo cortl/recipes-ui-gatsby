@@ -5,12 +5,10 @@ import Image from './image';
 
 const Header = ({siteTitle}) => (
 	<header className='tc pv3 pv3-ns bb bg-light-red'>
-		<Image />
-		<h1 className='f5 f4-ns fw6 mid-gray geneva'>
-			<Link to='/' className='link dim white'>
-				{siteTitle}
-			</Link>
-		</h1>
+		<Link to='/' className='link dim '>
+			<Image />
+			<h1 className='f5 f4-ns fw6 white dim geneva'>{siteTitle}</h1>
+		</Link>
 	</header>
 );
 
