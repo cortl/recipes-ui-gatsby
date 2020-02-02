@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {graphql} from 'gatsby';
 import 'tachyons-sass/tachyons.scss';
 
@@ -8,25 +8,38 @@ import BackgroundImage from 'gatsby-background-image';
 
 const ingredients = ({ingredients}) => (
 	<ul className='list pl0'>
-		{ingredients.map((ingredient, i) => (
-			<li
-				className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30'
-				key={`${i}ingredient`}
-			>
-				{ingredient}
-			</li>
-		))}
+		{ingredients.map((ingredient, i) => {
+			const [completed, setIngredientCompleted] = useState(false);
+			return (
+				<li
+					className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30'
+					onClick={() => setIngredientCompleted(completed => !completed)}
+					key={`${i}ingredient`}
+				>
+					<span className={`${completed ? 'strike' : ''}`}>{ingredient}</span>
+				</li>
+			);
+		})}
 	</ul>
 );
 
 const instructions = ({instructions}) => (
 	<ol className='list pl0'>
-		{instructions.map((instruction, i) => (
-			<li className='pv1 lh-copy' key={`instruction${i}`}>
-				<p className='mv0 b'>{`Step ${i + 1}`}</p>
-				<p className='mv0'>{instruction}</p>
-			</li>
-		))}
+		{instructions.map((instruction, i) => {
+			const [completed, setInstructionCompleted] = useState(false);
+
+			return (
+				<li className='pv1 lh-copy' key={`instruction${i}`}>
+					<p className='mv0 b'>{`Step ${i + 1}`}</p>
+					<p
+						onClick={() => setInstructionCompleted(completed => !completed)}
+						className={`mv0 ${completed ? 'strike' : ''}`}
+					>
+						{instruction}
+					</p>
+				</li>
+			);
+		})}
 	</ol>
 );
 
@@ -34,7 +47,6 @@ const buildDefinitions = definitions =>
 	definitions.map((definition, i) =>
 		buildDefinition(definition.key, definition.value, i === 0)
 	);
-
 const buildDefinition = (key, value, isFirst) => (
 	<React.Fragment key={`dt${key}`}>
 		<dt className={`b ${isFirst ? '' : 'mt2'} `}>{key}</dt>
