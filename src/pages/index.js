@@ -7,7 +7,7 @@ import {Search} from '../components/search';
 import {Feature} from '../components/feature';
 
 const IndexPage = () => {
-	const [shown, setShown] = useState(6);
+	const [shown, setShown] = useState(12);
 	const handleScroll = e => {
 		const scrolled = Math.round(
 			window.innerHeight + document.documentElement.scrollTop
