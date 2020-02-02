@@ -70,7 +70,8 @@ const details = ({source, notes, rating}) => (
 	</dl>
 );
 
-const hero = ({placeholderImage}, {title, rating}) => {
+const hero = ({allRecipesJson}, {title, rating}) => {
+	const image = allRecipesJson.nodes[0].image;
 	const content = () => (
 		<>
 			<nav className='dt w-100'>
@@ -88,11 +89,11 @@ const hero = ({placeholderImage}, {title, rating}) => {
 	);
 	return (
 		<header className='sans-serif'>
-			{placeholderImage ? (
+			{image ? (
 				<BackgroundImage
 					Tag='div'
 					className={'cover bg-left bg-center-l'}
-					fluid={placeholderImage.childImageSharp.fluid}
+					fluid={image.childImageSharp.fluid}
 					backgroundColor={`#040e18`}
 				>
 					<div className='bg-black-40 pb5 pb5-m pb5-l'>{content()}</div>
@@ -122,11 +123,18 @@ const Recipe = ({data, pageContext}) => {
 };
 
 export const query = graphql`
-	query($image: String) {
-		placeholderImage: file(relativePath: {eq: $image}) {
-			childImageSharp {
-				fluid(maxWidth: 1920, maxHeight: 960) {
-					...GatsbyImageSharpFluid
+	query RecipeImage($slug: String) {
+		allRecipesJson(filter: {slug: {eq: $slug}}) {
+			nodes {
+				slug
+				title
+				rating
+				image {
+					childImageSharp {
+						fluid(maxWidth: 1920, maxHeight: 960) {
+							src
+						}
+					}
 				}
 			}
 		}

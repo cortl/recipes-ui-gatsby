@@ -23,7 +23,6 @@ const RecipesPage = () => {
 					slug
 					title
 					rating
-					image
 				}
 			}
 		}

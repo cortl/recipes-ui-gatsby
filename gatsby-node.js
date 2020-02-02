@@ -5,7 +5,6 @@ exports.createPages = async function ({actions, graphql}) {
 				nodes {
 					ingredients
 					instructions
-					image
 					slug
 					notes
 					title

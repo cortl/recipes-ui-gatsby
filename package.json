@@ -1,7 +1,7 @@
 {
   "name": "recipes",
   "private": true,
-  "description": "Gatsby website for displaying recipes I follow and rank",
+  "description": "Gatsby website for displaying cortl's recipes",
   "version": "0.1.0",
   "author": "Cortlan Bainbridge <hello@cortlan.dev>",
   "dependencies": {

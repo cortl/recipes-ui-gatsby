@@ -3,26 +3,24 @@ import {useStaticQuery, graphql} from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import Search from '../components/search';
-import Card from '../components/card';
-
-const toSearch = ({slug, title, rating}) => ({
-	url: `recipes/${slug}`,
-	key: title,
-	title,
-	rating,
-	value: `${title} - ${rating}/10`,
-});
+import {Search} from '../components/search';
+import {Feature} from '../components/feature';
 
 const IndexPage = () => {
 	const data = useStaticQuery(graphql`
-		query RecipeQuery {
-			allRecipesJson {
+		query TopRecipesQuery {
+			allRecipesJson(limit: 9, sort: {fields: rating, order: DESC}) {
 				nodes {
 					slug
 					title
 					rating
-					image
+					image {
+						childImageSharp {
+							fluid(maxWidth: 300, maxHeight: 300) {
+								...GatsbyImageSharpFluid
+							}
+						}
+					}
 				}
 			}
 		}
@@ -31,16 +29,14 @@ const IndexPage = () => {
 	return (
 		<Layout>
 			<SEO title='Home' />
-			<Search data={data.allRecipesJson.nodes.map(toSearch)} />
-			<div className='center'>
-				{['Beef', 'Chicken', 'Pork', 'Turkey', 'Pasta'].map(category => (
-					<Card
-						key={category}
-						title={category}
-						link={`/${category.toLowerCase()}/`}
-					/>
-				))}
-				<Card title='All Recipes' link={`/recipes`} />
+
+			<div className='mw100 mw9-m mw8-l center'>
+				<Search />
+				<div>
+					{data.allRecipesJson.nodes.map((recipe, i) => (
+						<Feature {...recipe} />
+					))}
+				</div>
 			</div>
 		</Layout>
 	);
