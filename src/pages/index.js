@@ -13,7 +13,7 @@ const IndexPage = () => {
 			window.innerHeight + document.documentElement.scrollTop
 		);
 		const totalScrollable = document.documentElement.offsetHeight - 100;
-		if (scrolled === totalScrollable) {
+		if (scrolled > totalScrollable) {
 			setShown(prev => prev + 6);
 		}
 	};
