@@ -1,5 +1,6 @@
 import React from 'react';
 import {graphql} from 'gatsby';
+import 'tachyons-sass/tachyons.scss';
 
 import SEO from '../components/seo';
 import Image from '../components/image';
