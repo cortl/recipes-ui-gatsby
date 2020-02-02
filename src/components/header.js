@@ -7,7 +7,7 @@ const Header = ({siteTitle}) => (
 	<header className='tc pv3 pv3-ns bb bg-light-red'>
 		<Link to='/' className='link dim '>
 			<Image />
-			<h1 className='f5 f4-ns fw6 white dim geneva'>{siteTitle}</h1>
+			<h1 className='f5 f4-ns fw6 white dim'>{siteTitle}</h1>
 		</Link>
 	</header>
 );

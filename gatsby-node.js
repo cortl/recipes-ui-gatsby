@@ -26,12 +26,4 @@ exports.createPages = async function ({actions, graphql}) {
       context: {...node},
     });
   });
-
-  ['Beef', 'Chicken', 'Turkey', 'Pork', 'Pasta'].map(category => {
-    actions.createPage({
-      path: category.toLowerCase(),
-      component: require.resolve('./src/templates/category.js'),
-      context: {search: category, recipes},
-    });
-  });
 };
