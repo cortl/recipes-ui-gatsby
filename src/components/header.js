@@ -5,7 +5,7 @@ import React from 'react';
 import Image from './image';
 
 const Header = ({siteTitle}) => (
-	<header className='tc pv3 pv3-ns bb bg-light-red'>
+	<header className='tc pv3 pv3-ns bb bg-light-red sans-serif'>
 		<Link to='/' className='link dim '>
 			<Image />
 			<h1 className='f5 f4-ns fw6 white dim'>{siteTitle}</h1>
