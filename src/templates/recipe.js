@@ -72,7 +72,7 @@ const details = ({source, notes, rating}) => (
 
 const hero = ({placeholderImage}, {title, rating}) => {
 	const content = () => (
-		<div className='bg-black-40 pb5 pb5-m pb5-l'>
+		<>
 			<nav className='dt w-100'>
 				<div className='dtc pa1'>
 					<a className='link dim dib h2' href='/'>
@@ -84,7 +84,7 @@ const hero = ({placeholderImage}, {title, rating}) => {
 				<h1 className='f2 f1-l fw2 white-90 mb0 lh-title'>{title}</h1>
 				<h2 className='fw1 f3 white-80 mt3 mb4'>{`Rating ${rating}/10`}</h2>
 			</div>
-		</div>
+		</>
 	);
 	return (
 		<header className='sans-serif'>
@@ -95,10 +95,10 @@ const hero = ({placeholderImage}, {title, rating}) => {
 					fluid={placeholderImage.childImageSharp.fluid}
 					backgroundColor={`#040e18`}
 				>
-					{content()}
+					<div className='bg-black-40 pb5 pb5-m pb5-l'>{content()}</div>
 				</BackgroundImage>
 			) : (
-				<div className={'bg-blue '}>{content()}</div>
+				<div className={'bg-light-red pb5 pb5-m pb5-l'}>{content()}</div>
 			)}
 		</header>
 	);
