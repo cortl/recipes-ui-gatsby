@@ -59,7 +59,7 @@ jobs:
       - persist_to_workspace:
             root: .
             paths:
-                - ~/repo
+                - fetch
 
   build_ui:
     docker: 
