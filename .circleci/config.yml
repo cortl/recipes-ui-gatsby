@@ -15,7 +15,9 @@ workflows:
   commit:
     jobs:
       - update_recipes
-      - build_ui
+      - build_ui:
+          requires:
+            - update_recipes
   nightly:
     triggers:
       - schedule:
@@ -26,7 +28,9 @@ workflows:
                 - master
     jobs:
       - update_recipes
-      - build_ui
+      - build_ui:
+          requires:
+            - update_recipes
 
 jobs:
   update_recipes:
@@ -46,12 +50,16 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: echo $GCP_KEY > credentials.json
-      - run: rm parsers/README.md
+      - run: rm fetch/README.md
       - run: npm --prefix fetch start
       - run: npm --prefix fetch test
       - run: git add .
       - run: git commit -m '[skip ci] Nightly recipe update'
       - run: git push origin HEAD
+      - persist_to_workspace:
+            root: .
+            paths:
+                - ~/repo
 
   build_ui:
     docker: 
