@@ -49,7 +49,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: echo $GCP_KEY > fetch/credentials.json
+      - run: echo $GCP_KEY > credentials.json
       - run: npm --prefix fetch start
       - run: npm --prefix fetch test
       - run: git add .
