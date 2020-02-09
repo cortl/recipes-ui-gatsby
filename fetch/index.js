@@ -92,7 +92,7 @@ const main = () => {
     auth.getClient()
         .then(createRecipeFromSheet)
         .then(recipes => recipes.filter(Boolean))
-        .then(updateMarkdown)
+        // .then(updateMarkdown)
         .then(reportMissing)
         .catch(console.error);
 }

@@ -50,7 +50,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: echo $GCP_KEY > fetch/credentials.json
-      - run: rm fetch/README.md
       - run: npm --prefix fetch start
       - run: npm --prefix fetch test
       - run: git add .
