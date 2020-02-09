@@ -1,10 +1,11 @@
 {
-  "name": "recipes",
+  "name": "recipes-ui",
   "private": true,
   "description": "Gatsby website for displaying cortl's recipes",
   "version": "0.1.0",
   "author": "Cortlan Bainbridge <hello@cortlan.dev>",
   "dependencies": {
+    "@cortl/recipes": "^1.0.4",
     "fuse.js": "^3.4.6",
     "gatsby": "^2.18.12",
     "gatsby-background-image": "^0.9.13",
@@ -49,9 +50,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cortl/recipes"
+    "url": "https://github.com/cortl/recipes-ui"
   },
   "bugs": {
-    "url": "https://github.com/cortl/recipes/issues"
+    "url": "https://github.com/cortl/recipes-ui/issues"
   }
 }
