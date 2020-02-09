@@ -1,15 +1,62 @@
-# 
-# CircleCI 2.0 Gatsby to Firebase Configuration File
-#
+version: 2.1
 
-version: 2
+commands:
+  setup-git:
+    steps:
+      - run:
+          name: Setup Git
+          command: |
+            git config user.email "cortlan.bainbridge@gmail.com"
+            git config user.name "Circle CI"
+      - add_ssh_keys
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - update_recipes
+      - build_ui
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - update_recipes
+      - build_ui
+
 jobs:
-  build:
+  update_recipes:
+      docker: 
+      - image: circleci/node:lts
+      working_directory: ~/repo
+      steps:
+      - checkout
+      - setup-git
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: echo $GCP_KEY > credentials.json
+      - run: rm parsers/README.md
+      - run: npm --prefix fetch start
+      - run: npm --prefix fetch test
+      - run: git add .
+      - run: git commit -m '[skip ci] Nightly recipe update'
+      - run: git push origin HEAD
+
+  build_ui:
     docker: 
       - image: circleci/node:lts
-
     working_directory: ~/repo
-
     steps:
       - checkout
       - run: git submodule update --init --recursive 
@@ -21,21 +68,17 @@ jobs:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
             # Find the most recently generated cache used from any branch
             - v1-npm-deps-
-      
       - run:
           name: Install Dependencies
-          command: npm install
-
+          command: npm ci
       - save_cache: 
           key: v1-npm-deps-{{ checksum "package-lock.json" }}
             
           paths:
             - ./node_modules          
-
       - run:
           name: Gatsby Build
           command: ./node_modules/.bin/gatsby build
-      
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN

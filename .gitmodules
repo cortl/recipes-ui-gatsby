@@ -1,6 +1,3 @@
 [submodule "cooking"]
 	path = cooking
 	url = https://github.com/cortl/cooking.git
-[submodule "recipe-parsers"]
-	path = recipe-parsers
-	url = git@github.com:cortl/recipe-parsers.git

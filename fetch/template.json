@@ -1,0 +1,16 @@
+{
+    "title": "Recipe name",
+    "rating": "0-10 as a number",
+    "slug": "page url",
+    "notes": [
+        "anything additional people should know about this recipe"
+    ],
+    "source": "source of the recipe, if possible",
+    "image": "file name, if applicable",
+    "ingredients": [
+        "1x Chicken breast"
+    ],
+    "instructions": [
+        "Assembly instructions"
+    ]
+}

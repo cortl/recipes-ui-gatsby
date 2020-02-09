@@ -18,7 +18,7 @@ module.exports = {
 			resolve: `gatsby-source-filesystem`,
 			options: {
 				name: `images`,
-				path: `${__dirname}/recipe-parsers/images`,
+				path: `${__dirname}/fetch/images`,
 			},
 		},
 		`gatsby-transformer-sharp`,
@@ -40,7 +40,7 @@ module.exports = {
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				path: `${__dirname}/recipe-parsers/recipes`,
+				path: `${__dirname}/fetch/recipes`,
 			},
 		},
 	],
