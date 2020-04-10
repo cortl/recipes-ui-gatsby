@@ -5,10 +5,10 @@ import React from 'react';
 import Image from './image';
 
 const Header = ({siteTitle}) => (
-	<header className='tc pv3 pv3-ns bb bg-light-red sans-serif'>
+	<header className='tc pv3 pv3-ns bb bw4 b--black-10 bg-light-red sans-serif'>
 		<Link to='/' className='link dim '>
 			<Image />
-			<h1 className='f5 f4-ns fw6 white dim'>{siteTitle}</h1>
+			<h1 className='white'>{siteTitle}</h1>
 		</Link>
 	</header>
 );

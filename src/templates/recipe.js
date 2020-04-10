@@ -30,7 +30,7 @@ const instructions = ({instructions}) => (
 
 			return (
 				<li className='pv1 lh-copy' key={`instruction${i}`}>
-					<p className='mv0 b'>{`Step ${i + 1}`}</p>
+					<h3 className='mv0 b'>{`Step ${i + 1}`}</h3>
 					<p
 						onClick={() => setInstructionCompleted(completed => !completed)}
 						className={`mv0 ${completed ? 'strike' : ''}`}
@@ -60,8 +60,8 @@ const details = ({source, notes, rating}) => (
 			{
 				key: 'Source',
 				value: (
-					<a className='link black dim' href={source}>
-						{source}
+					<a className='link black underline  dim' href={source}>
+						{'Here'}
 					</a>
 				),
 			},
