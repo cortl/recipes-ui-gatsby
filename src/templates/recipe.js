@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {graphql} from 'gatsby';
+import {Link} from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
+
 import 'tachyons-sass/tachyons.scss';
 
 import SEO from '../components/seo';
-import Image from '../components/image';
-import BackgroundImage from 'gatsby-background-image';
 
 const ingredients = ({ingredients}) => (
 	<ul className='list pl0'>
@@ -47,6 +48,7 @@ const buildDefinitions = definitions =>
 	definitions.map((definition, i) =>
 		buildDefinition(definition.key, definition.value, i === 0)
 	);
+
 const buildDefinition = (key, value, isFirst) => (
 	<React.Fragment key={`dt${key}`}>
 		<dt className={`b ${isFirst ? '' : 'mt2'} `}>{key}</dt>
@@ -72,13 +74,13 @@ const details = ({source, notes, rating}) => (
 
 const hero = ({allRecipesJson}, {title, rating}) => {
 	const image = allRecipesJson.nodes[0].image;
-	const content = () => (
+	const content = (
 		<>
 			<nav className='dt w-100'>
 				<div className='dtc pa1'>
-					<a className='link dim dib h2' href='/'>
-						<Image />
-					</a>
+					<Link to={`/`} className='pa2 link dim dib h2 f4 white'>
+						{'< Back'}
+					</Link>
 				</div>
 			</nav>
 			<div className='tc-l m43 m43-m mt5-l ph3'>
@@ -87,36 +89,43 @@ const hero = ({allRecipesJson}, {title, rating}) => {
 			</div>
 		</>
 	);
-	return (
+
+	return image ? (
 		<header className='sans-serif'>
-			{image ? (
-				<BackgroundImage
-					Tag='div'
-					className={'cover bg-left bg-center-l'}
-					fluid={image.childImageSharp.fluid}
-					backgroundColor={`#040e18`}
-				>
-					<div className='bg-black-40 pb5 pb5-m pb5-l'>{content()}</div>
-				</BackgroundImage>
-			) : (
-				<div className={'bg-light-red pb5 pb5-m pb5-l'}>{content()}</div>
-			)}
+			<BackgroundImage
+				Tag='div'
+				className={'cover bg-left bg-center-l'}
+				fluid={image.childImageSharp.fluid}
+				backgroundColor={`#040e18`}
+			>
+				<div className='bg-black-40 pb5 pb5-m pb5-l'>{content}</div>
+			</BackgroundImage>
+		</header>
+	) : (
+		<header className='bb bw4 b--black-10 bg-light-red sans-serif'>
+			<div className={'pb5 pb5-m pb5-l'}>{content}</div>
 		</header>
 	);
 };
 
 const Recipe = ({data, pageContext}) => {
 	return (
-		<div className='sans-serif'>
+		<div className='sans-serif bg-near-white'>
 			<SEO title={pageContext.title} />
 			{hero(data, pageContext)}
 			<article className='pa4 mx-auto mw7-l center'>
-				<h2>Ingredients</h2>
-				{ingredients(pageContext)}
-				<h2>Instructions</h2>
-				{instructions(pageContext)}
-				<h2>Details</h2>
-				{details(pageContext)}
+				<div className='br2 pa3 mb3 bg-white shadow-4'>
+					<h2>Ingredients</h2>
+					{ingredients(pageContext)}
+				</div>
+				<div className='br2 pa3 mb3 bg-white shadow-4'>
+					<h2>Instructions</h2>
+					{instructions(pageContext)}
+				</div>
+				<div className='br2 pa3 bg-white shadow-4'>
+					<h2>Details</h2>
+					{details(pageContext)}
+				</div>
 			</article>
 		</div>
 	);
