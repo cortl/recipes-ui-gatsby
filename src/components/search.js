@@ -47,15 +47,17 @@ export const Search = () => {
 						<label htmlFor='name' className='f3 b db mb2'>
 							{'Search'}
 						</label>
-						<input
-							id='name'
-							className='ba b--black-20 pa2 db w-100'
-							type='text'
-							aria-describedby='name-desc'
-							onChange={e => {
-								setResults(searchFor(data, e.target.value));
-							}}
-						/>
+						<div className='pl2 pr2'>
+							<input
+								id='name'
+								className='ba b--black-20 pa2 db w-100'
+								type='text'
+								aria-describedby='name-desc'
+								onChange={e => {
+									setResults(searchFor(data, e.target.value));
+								}}
+							/>
+						</div>
 						{Boolean(results.length) && (
 							<div style={searchResult} className='absolute w-100'>
 								<ul
