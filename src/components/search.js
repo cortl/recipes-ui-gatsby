@@ -65,9 +65,7 @@ export const Search = () => {
 									className='list bg-white w-100 ba br2 b--light-gray'
 								>
 									{results.map((item, i) => {
-										let className = `dim bb b--light-gray pl3 pr3 pv3 ${
-											i === 0 ? '' : ''
-										}`;
+										let className = `dim bb b--light-gray pl3 pr3 pv3`;
 										return (
 											<Link
 												key={`search${i}`}
@@ -75,7 +73,8 @@ export const Search = () => {
 												className='link black w-100'
 											>
 												<li key={`${i}${item.title}`} className={className}>
-													{item.title}
+													<span>{item.title} - </span>
+													<span className='tr'>{`${item.rating}/10`}</span>
 												</li>
 											</Link>
 										);
