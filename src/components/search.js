@@ -8,6 +8,8 @@ const FUSE_CONFIG = {
 	threshold: 0.6,
 };
 const LIMIT = 10;
+const noListPrefix = {paddingInlineStart: '0px', marginBlockStart: '0px'};
+const searchResult = {zIndex: 50};
 
 const toSearch = ({slug, title, rating}) => ({
 	url: `/recipes/${slug}/`,
@@ -37,37 +39,51 @@ export const Search = () => {
 			}
 		}
 	`);
-
 	return (
-		<>
-			<form className='pt3'>
-				<div className='pa2 w-100 w-80-m w-60-l center'>
-					<label htmlFor='name' className='f6 b db mb2'>
-						Search
-					</label>
-					<input
-						id='name'
-						className='ba b--black-20 pa2 mb2 db w-100'
-						type='text'
-						aria-describedby='name-desc'
-						onChange={e => {
-							setResults(searchFor(data, e.target.value));
-						}}
-					/>
-				</div>
-			</form>
-			<ul className='list pl0 center br bl w-70-l w-100'>
-				{results.map((item, i) => {
-					const className = `dim ph3 pv3 bb ${i === 0 ? 'bt' : ''}`;
-					return (
-						<Link key={`search${i}`} to={item.url} className='link black'>
-							<li key={`${i}${item.title}`} className={className}>
-								{item.title}
-							</li>
-						</Link>
-					);
-				})}
-			</ul>
-		</>
+		<div className='pt2 pb2 mh2'>
+			<div className='br2 bg-white shadow-4 mt2 pb2'>
+				<form className='pt3'>
+					<div className='w-100 pt2 pb2 w-80-m w-60-l relative center'>
+						<label htmlFor='name' className='f3 b db mb2'>
+							{'Search'}
+						</label>
+						<input
+							id='name'
+							className='ba b--black-20 pa2 db w-100'
+							type='text'
+							aria-describedby='name-desc'
+							onChange={e => {
+								setResults(searchFor(data, e.target.value));
+							}}
+						/>
+						{Boolean(results.length) && (
+							<div style={searchResult} className='absolute w-100'>
+								<ul
+									style={noListPrefix}
+									className='list bg-white w-100 ba br2 b--light-gray'
+								>
+									{results.map((item, i) => {
+										let className = `dim bb b--light-gray pl3 pr3 pv3 ${
+											i === 0 ? '' : ''
+										}`;
+										return (
+											<Link
+												key={`search${i}`}
+												to={item.url}
+												className='link black w-100'
+											>
+												<li key={`${i}${item.title}`} className={className}>
+													{item.title}
+												</li>
+											</Link>
+										);
+									})}
+								</ul>
+							</div>
+						)}
+					</div>
+				</form>
+			</div>
+		</div>
 	);
 };

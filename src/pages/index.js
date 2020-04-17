@@ -45,7 +45,7 @@ const IndexPage = () => {
 	return (
 		<Layout>
 			<SEO title='Home' />
-			<div className='mw100 mw9-m mw8-l center'>
+			<div className='mw-100 mw9-m mw8-l center'>
 				<Search />
 				<div>
 					{data.allRecipesJson.nodes.slice(0, shown).map((recipe, i) => (
