@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import {graphql} from 'gatsby';
 import {Link} from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
@@ -7,22 +7,30 @@ import 'tachyons-sass/tachyons.scss';
 
 import SEO from '../components/seo';
 
-const ingredients = ({ingredients}) => (
-	<ul className='list pl0'>
-		{ingredients.map((ingredient, i) => {
-			const [completed, setIngredientCompleted] = useState(false);
-			return (
-				<li
-					className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30'
-					onClick={() => setIngredientCompleted(completed => !completed)}
-					key={`${i}ingredient`}
-				>
-					<span className={`${completed ? 'strike' : ''}`}>{ingredient}</span>
-				</li>
-			);
-		})}
-	</ul>
-);
+const ingredients = ({ingredients}) =>
+	ingredients.map(ingredientSet => (
+		<Fragment key={ingredientSet.category}>
+			{ingredients.length > 1 && (
+				<h4 className='mv0'>{ingredientSet.category}</h4>
+			)}
+			<ul className='list pl0 mt0'>
+				{ingredientSet.items.map((ingredient, i) => {
+					const [completed, setIngredientCompleted] = useState(false);
+					return (
+						<li
+							className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30'
+							onClick={() => setIngredientCompleted(completed => !completed)}
+							key={`${i}ingredient`}
+						>
+							<span className={`${completed ? 'strike' : ''}`}>
+								{ingredient}
+							</span>
+						</li>
+					);
+				})}
+			</ul>
+		</Fragment>
+	));
 
 const instructions = ({instructions}) => (
 	<ol className='list pl0'>

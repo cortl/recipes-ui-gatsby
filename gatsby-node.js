@@ -3,8 +3,11 @@ exports.createPages = async function ({actions, graphql}) {
 		{
 			allRecipesJson {
 				nodes {
-					ingredients
 					instructions
+					ingredients {
+						category
+						items
+					}
 					slug
 					notes
 					title
@@ -15,15 +18,15 @@ exports.createPages = async function ({actions, graphql}) {
 		}
 	`);
 
-  const recipes = data.allRecipesJson.nodes
-    .filter(node => Boolean(node.slug))
-    .filter(node => node.ingredients.length);
+	const recipes = data.allRecipesJson.nodes
+		.filter(node => Boolean(node.slug))
+		.filter(node => node.ingredients.length);
 
-  recipes.forEach(node => {
-    actions.createPage({
-      path: `recipes/${node.slug}`,
-      component: require.resolve(`./src/templates/recipe.js`),
-      context: {...node},
-    });
-  });
+	recipes.forEach(node => {
+		actions.createPage({
+			path: `recipes/${node.slug}`,
+			component: require.resolve(`./src/templates/recipe.js`),
+			context: { ...node },
+		});
+	});
 };
