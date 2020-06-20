@@ -13,6 +13,7 @@ exports.createPages = async function ({actions, graphql}) {
 					title
 					source
 					rating
+					createdDate
 				}
 			}
 		}

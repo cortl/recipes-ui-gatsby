@@ -53,32 +53,28 @@ const instructions = ({instructions}) => (
 );
 
 const buildDefinitions = definitions =>
-	definitions.map((definition, i) =>
-		buildDefinition(definition.key, definition.value, i === 0)
-	);
+	definitions.map(({key, value}) => buildDefinition(key, value));
 
-const buildDefinition = (key, value, isFirst) => (
-	<React.Fragment key={`dt${key}`}>
-		<dt className={`b ${isFirst ? '' : 'mt2'} `}>{key}</dt>
-		<dd className={`ml0`}>{value}</dd>
-	</React.Fragment>
-);
-const details = ({source, notes, rating}) => (
-	<dl className=''>
-		{buildDefinitions([
-			{key: 'Rating', value: `${rating}/10`},
-			{
-				key: 'Source',
-				value: (
-					<a className='link black underline  dim' href={source}>
-						{'Here'}
-					</a>
-				),
-			},
-			{key: 'Notes', value: notes},
-		])}
+const buildDefinition = (key, value) => (
+	<dl className='f5 lh-title mv2' key={key}>
+		<dt className='dib b'>{`${key}:`}&nbsp;</dt>
+		<dd className='dib ml0 gray'>{value}</dd>
 	</dl>
 );
+const details = ({source, notes, rating, createdDate}) =>
+	buildDefinitions([
+		{key: 'Rating', value: `${rating}/10`},
+		{
+			key: 'Source',
+			value: (
+				<a className='link black underline  dim' href={source}>
+					{'Here'}
+				</a>
+			),
+		},
+		{key: 'Created', value: createdDate},
+		{key: 'Notes', value: notes},
+	]);
 
 const hero = ({allRecipesJson}, {title, rating}) => {
 	const image = allRecipesJson.nodes[0].image;
