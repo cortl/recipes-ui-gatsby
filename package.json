@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Cortlan Bainbridge <hello@cortlan.dev>",
   "dependencies": {
-    "@cortl/recipes": "^2.0.36",
+    "@cortl/recipes": "^2.0.38",
     "fuse.js": "^3.4.6",
     "gatsby": "^2.24.33",
     "gatsby-background-image": "^0.9.13",
