@@ -51,7 +51,7 @@ const instructions = ({instructions}) => (
 	</ol>
 );
 
-const Recipe = ({data, pageContext}) => {
+const Recipe = ({data, pageContext, location}) => {
 	return (
 		<div className='helvetica center mw8'>
 			<SEO title={pageContext.title} />
@@ -72,10 +72,11 @@ const Recipe = ({data, pageContext}) => {
 					<div className='fr ph2-ns cf'>
 						<div className='pr4 pt4'>
 							<a
-								href={window.location.href}
+								href={location.pathname}
 								target='_blank'
 								rel='noopener noreferrer'
 								aria-label='Share'
+								className='pa2'
 							>
 								<i className='gg-share black dim' />
 							</a>
@@ -108,7 +109,7 @@ const Recipe = ({data, pageContext}) => {
 								</a>
 							</div>
 						</div>
-						<div className='fl w-100 w-50-ns pa2'>
+						<div className='fl w-100 w-40-ns pa2'>
 							<div>
 								<h3>{'Time'}</h3>
 								{pageContext.time.map(({label, units}, i) => (
