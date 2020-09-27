@@ -7,14 +7,14 @@ import {Search} from '../components/search';
 import {Feature} from '../components/feature';
 
 const IndexPage = () => {
-	const [shown, setShown] = useState(12);
+	const [shown, setShown] = useState(24);
 	const handleScroll = e => {
 		const scrolled = Math.round(
 			window.innerHeight + document.documentElement.scrollTop
 		);
 		const totalScrollable = document.documentElement.offsetHeight - 100;
 		if (scrolled > totalScrollable) {
-			setShown(prev => prev + 6);
+			setShown(prev => prev + 12);
 		}
 	};
 	useEffect(() => {
@@ -45,12 +45,14 @@ const IndexPage = () => {
 	return (
 		<Layout>
 			<SEO title='Home' />
-			<div className='mw-100 mw9-m mw8-l center'>
+			<div className='mw-100'>
 				<Search />
-				<div>
-					{data.allRecipesJson.nodes.slice(0, shown).map((recipe, i) => (
-						<Feature key={`recipe${i}`} {...recipe} />
-					))}
+				<div className='w100'>
+					<div className='flex-l flex-wrap-l justify-center-l'>
+						{data.allRecipesJson.nodes.slice(0, shown).map((recipe, i) => (
+							<Feature key={i} {...recipe} />
+						))}
+					</div>
 				</div>
 			</div>
 		</Layout>

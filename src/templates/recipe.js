@@ -1,7 +1,6 @@
 import React, {useState, Fragment} from 'react';
 import {graphql} from 'gatsby';
-import {Link} from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
+import Img from 'gatsby-image';
 
 import 'tachyons-sass/tachyons.scss';
 
@@ -52,84 +51,89 @@ const instructions = ({instructions}) => (
 	</ol>
 );
 
-const buildDefinitions = definitions =>
-	definitions.map(({key, value}) => buildDefinition(key, value));
-
-const buildDefinition = (key, value) => (
-	<dl className='f5 lh-title mv2' key={key}>
-		<dt className='dib b'>{`${key}:`}&nbsp;</dt>
-		<dd className='dib ml0 gray'>{value}</dd>
-	</dl>
-);
-const details = ({source, notes, rating, createdDate}) =>
-	buildDefinitions([
-		{key: 'Rating', value: `${rating}/10`},
-		{
-			key: 'Source',
-			value: (
-				<a className='link black underline  dim' href={source}>
-					{'Here'}
-				</a>
-			),
-		},
-		{key: 'Created', value: createdDate},
-		{key: 'Notes', value: notes},
-	]);
-
-const hero = ({allRecipesJson}, {title, rating}) => {
-	const image = allRecipesJson.nodes[0].image;
-	const content = (
-		<>
-			<nav className='dt w-100'>
-				<div className='dtc pa1'>
-					<Link to={`/`} className='pa2 link dim dib h2 f4 white'>
-						{'< Back'}
-					</Link>
-				</div>
-			</nav>
-			<div className='tc-l m43 m43-m mt5-l ph3'>
-				<h1 className='f2 f1-l fw2 white-90 mb0 lh-title'>{title}</h1>
-				<h2 className='fw1 f3 white-80 mt3 mb4'>{`Rating ${rating}/10`}</h2>
-			</div>
-		</>
-	);
-
-	return image ? (
-		<header className='sans-serif'>
-			<BackgroundImage
-				Tag='div'
-				className={'cover bg-left bg-center-l'}
-				fluid={image.childImageSharp.fluid}
-				backgroundColor={`#040e18`}
-			>
-				<div className='bg-black-40 pb5 pb5-m pb5-l'>{content}</div>
-			</BackgroundImage>
-		</header>
-	) : (
-		<header className='bb bw4 b--black-10 bg-light-red sans-serif'>
-			<div className={'pb5 pb5-m pb5-l'}>{content}</div>
-		</header>
-	);
-};
-
 const Recipe = ({data, pageContext}) => {
 	return (
-		<div className='sans-serif bg-near-white'>
+		<div className='helvetica center mw8'>
 			<SEO title={pageContext.title} />
-			{hero(data, pageContext)}
-			<article className='pa4 mx-auto mw7-l center'>
-				<div className='br2 pa3 mb3 bg-white shadow-4'>
-					<h2>Ingredients</h2>
-					{ingredients(pageContext)}
-				</div>
-				<div className='br2 pa3 mb3 bg-white shadow-4'>
-					<h2>Instructions</h2>
-					{instructions(pageContext)}
-				</div>
-				<div className='br2 pa3 bg-white shadow-4'>
-					<h2>Details</h2>
-					{details(pageContext)}
-				</div>
+			<header className='f1 lh-solid fw8 pb4 pt4 tc'>
+				{pageContext.title}
+			</header>
+			<article className='ph2 ph2-m ph0-l'>
+				<section className='shadow-3 br4 pb2'>
+					{data.allRecipesJson.nodes[0].image && (
+						<Img
+							placeholderClassName='w-100'
+							className='w-100 br4 br--top'
+							style={{height: '25em'}}
+							imgStyle={{height: '25em'}}
+							fluid={data.allRecipesJson.nodes[0].image.childImageSharp.fluid}
+						/>
+					)}
+					<div className='fr ph2-ns cf'>
+						<div className='pr4 pt4'>
+							<a
+								href={window.location.href}
+								target='_blank'
+								rel='noopener noreferrer'
+								aria-label='Share'
+							>
+								<i className='gg-share black dim' />
+							</a>
+						</div>
+					</div>
+					<div className='cf ph2-ns'>
+						<div className='fl w-100 w-50-ns pa2'>
+							<div>
+								<h3>{'Details'}</h3>
+								<p>
+									<strong>{'Rating: '}</strong>
+									{`${pageContext.rating}/10`}
+								</p>
+								<p>
+									<strong>{'Serves: '}</strong>
+									{pageContext.servings}
+								</p>
+								{pageContext.createdDate && (
+									<p>
+										<strong>{'Made on: '}</strong>
+										{pageContext.createdDate}
+									</p>
+								)}
+								<p>
+									<strong>{'Notes: '}</strong>
+									{pageContext.notes}
+								</p>
+								<a className='b link dim black-90' href={pageContext.source}>
+									{'Original Source'}
+								</a>
+							</div>
+						</div>
+						<div className='fl w-100 w-50-ns pa2'>
+							<div>
+								<h3>{'Time'}</h3>
+								{pageContext.time.map(({label, units}, i) => (
+									<p key={i}>
+										<strong>{`${label}: `}</strong>
+										{units}
+									</p>
+								))}
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section className='shadow-3 br4 mt4'>
+					<div className='cf ph2-ns'>
+						<div className='fl w-100 w-30-ns pa2'>
+							<h2>{'Ingredients'}</h2>
+							{ingredients(pageContext)}
+						</div>
+						<div className='fl w-100 w-70-ns pa2'>
+							<h2>{'Instructions'}</h2>
+							{instructions(pageContext)}
+						</div>
+					</div>
+				</section>
 			</article>
 		</div>
 	);

@@ -61,7 +61,9 @@ function SEO({description, lang, meta, title}) {
 					content: metaDescription,
 				},
 			].concat(meta)}
-		/>
+		>
+			<link href='https://css.gg/css' rel='stylesheet' />
+		</Helmet>
 	);
 }
 

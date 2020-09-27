@@ -8,6 +8,11 @@ exports.createPages = async function ({actions, graphql}) {
 						category
 						items
 					}
+					time {
+						label
+						units
+					}
+					servings
 					slug
 					notes
 					title
