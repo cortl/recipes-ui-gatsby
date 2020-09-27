@@ -4,11 +4,10 @@ import React from 'react';
 
 import Image from './image';
 
-const Header = ({siteTitle}) => (
-	<header className='tc pv3 pv3-ns bb bw4 b--black-10 bg-light-red sans-serif'>
-		<Link to='/' className='link dim '>
-			<Image />
-			<h1 className='white'>{siteTitle}</h1>
+const Header = () => (
+	<header className='w100 tc'>
+		<Link to='/' className='link dim'>
+			<h1 className='helvetica black f1 lh-solid'>{"Cortlan's Recipes"}</h1>
 		</Link>
 	</header>
 );
