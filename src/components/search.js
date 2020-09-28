@@ -48,7 +48,9 @@ export const Search = () => {
 	const useKeybind = e => {
 		if (e.key === 'Enter') {
 			if (selected === -1) {
-				navigate(results[0].item.url);
+				if (results.length) {
+					navigate(results[0].item.url);
+				}
 			} else {
 				navigate(results[selected].item.url);
 			}
