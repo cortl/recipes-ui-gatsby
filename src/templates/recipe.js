@@ -7,48 +7,63 @@ import 'tachyons-sass/tachyons.scss';
 import SEO from '../components/seo';
 
 const ingredients = ({ingredients}) =>
-	ingredients.map(ingredientSet => (
+	ingredients.map((ingredientSet, categoryIndex) => (
 		<Fragment key={ingredientSet.category}>
-			{ingredients.length > 1 && (
-				<h4 className='mv0'>{ingredientSet.category}</h4>
-			)}
-			<ul className='list pl0 mt0'>
+			<fieldset className='pl0 bn'>
+				{ingredients.length > 1 && (
+					<legend className='mv0 b'>{ingredientSet.category}</legend>
+				)}
 				{ingredientSet.items.map((ingredient, i) => {
 					const [completed, setIngredientCompleted] = useState(false);
 					return (
 						<li
-							className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30'
-							onClick={() => setIngredientCompleted(completed => !completed)}
+							className='lh-copy pv1 ba bl-0 bt-0 br-0 b--dotted b--black-30 flex items-center'
 							key={`${i}ingredient`}
 						>
-							<span className={`${completed ? 'strike' : ''}`}>
+							<input
+								onChange={() => setIngredientCompleted(completed => !completed)}
+								id={`ingredient-${categoryIndex}-${i}`}
+								type='checkbox'
+								className='glow o-0'
+								checked={completed}
+							/>
+							<label
+								htmlFor={`ingredient-${categoryIndex}-${i}`}
+								className={`${completed ? 'strike' : ''}`}
+							>
 								{ingredient}
-							</span>
+							</label>
 						</li>
 					);
 				})}
-			</ul>
+			</fieldset>
 		</Fragment>
 	));
 
 const instructions = ({instructions}) => (
-	<ol className='list pl0'>
+	<fieldset className='list pl0 bn'>
 		{instructions.map((instruction, i) => {
 			const [completed, setInstructionCompleted] = useState(false);
-
 			return (
-				<li className='pv1 lh-copy' key={`instruction${i}`}>
-					<h3 className='mv0 b'>{`Step ${i + 1}`}</h3>
-					<p
-						onClick={() => setInstructionCompleted(completed => !completed)}
-						className={`mv0 ${completed ? 'strike' : ''}`}
+				<div key={i} className='pv1 lh-copy'>
+					<legend className='mv0 f4 b'>{`Step ${i + 1}`}</legend>
+					<label
+						htmlFor={`instruction-${i}`}
+						className={`${completed ? 'strike' : ''}`}
 					>
 						{instruction}
-					</p>
-				</li>
+					</label>
+					<input
+						type='checkbox'
+						onChange={() => setInstructionCompleted(completed => !completed)}
+						className='glow o-0'
+						id={`instruction-${i}`}
+						checked={completed}
+					/>
+				</div>
 			);
 		})}
-	</ol>
+	</fieldset>
 );
 
 const Recipe = ({data, pageContext, location}) => {
@@ -109,6 +124,9 @@ const Recipe = ({data, pageContext, location}) => {
 								</a>
 							</div>
 						</div>
+						<div className='fl w-100 w-50-ns pa2 center dn-ns'>
+							<div className='bb w-100 b--light-gray' />
+						</div>
 						<div className='fl w-100 w-40-ns pa2'>
 							<div>
 								<h3>{'Time'}</h3>
@@ -150,7 +168,7 @@ export const query = graphql`
 				image {
 					childImageSharp {
 						fluid(maxWidth: 1920, maxHeight: 960) {
-							src
+							...GatsbyImageSharpFluid
 						}
 					}
 				}

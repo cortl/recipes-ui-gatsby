@@ -2,8 +2,6 @@ import {Link} from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Image from './image';
-
 const Header = () => (
 	<header className='w100 tc'>
 		<Link to='/' className='link dim'>

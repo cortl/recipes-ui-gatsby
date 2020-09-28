@@ -58,7 +58,7 @@ export const Search = () => {
 				setSelected(selected + 1);
 			}
 		} else if (e.keyCode === UP) {
-			if (selected != 0) {
+			if (selected !== 0) {
 				setSelected(selected - 1);
 			}
 		} else if (e.keyCode === ESC) {
