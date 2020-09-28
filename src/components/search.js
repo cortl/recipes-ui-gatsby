@@ -48,9 +48,9 @@ export const Search = () => {
 	const useKeybind = e => {
 		if (e.key === 'Enter') {
 			if (selected === -1) {
-				navigate(results[0].url);
+				navigate(results[0].item.url);
 			} else {
-				navigate(results[selected].url);
+				navigate(results[selected].item.url);
 			}
 			e.preventDefault();
 		} else if (e.keyCode === DOWN) {
@@ -89,7 +89,7 @@ export const Search = () => {
 						style={noListPrefix}
 						className='list bg-white w-100 ba br4 b--light-gray'
 					>
-						{results.map((item, i) => {
+						{results.map(({item}, i) => {
 							let className = `dim bb b--light-gray pl3 pr3 pv3 ${
 								selected === i ? 'b' : ''
 							}`;
