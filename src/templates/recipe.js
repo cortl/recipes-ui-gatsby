@@ -167,7 +167,7 @@ export const query = graphql`
 				rating
 				image {
 					childImageSharp {
-						fluid(maxWidth: 1920, maxHeight: 960) {
+						fluid(maxWidth: 1920, maxHeight: 1080) {
 							...GatsbyImageSharpFluid
 						}
 					}
