@@ -1,8 +1,56 @@
 import React from 'react';
-import {useStaticQuery, graphql} from 'gatsby';
+import {useStaticQuery, graphql, Link} from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+
+const byRating = (recipeA, recipeB) =>
+	recipeB.rating > recipeA.rating
+		? 1
+		: recipeA.rating > recipeB.rating
+		? -1
+		: 0;
+
+const calculateAverageFromField = (objects, field) =>
+	Math.round(
+		(objects.reduce((total, obj) => total + obj[field], 0) / objects.length) *
+			100
+	) / 100;
+
+const YearlyStats = ({year, recipes}) => {
+	return (
+		<section>
+			<h1 className='f2 lh-copy'>{year}</h1>
+			<p>
+				<span className='b'>{'Total number of recipes made: '}</span>
+				{recipes.length}
+			</p>
+			<p>
+				<span className='b'>{'Average rating given: '}</span>
+				{calculateAverageFromField(recipes, 'rating')}
+			</p>
+			<p>
+				<span className='b'>{'Number of 10s given: '}</span>
+				{recipes.filter(recipe => recipe.rating === 10).length}
+			</p>
+			<p>
+				<span className='b'>{'Top three recipes: '}</span>
+			</p>
+			<ol>
+				{recipes
+					.sort(byRating)
+					.slice(0, 3)
+					.map(({slug, title, rating}) => (
+						<li key={slug}>
+							<Link to={`/recipes/${slug}/`} className='link black underline'>
+								{`${title} - ${rating}/10`}
+							</Link>
+						</li>
+					))}
+			</ol>
+		</section>
+	);
+};
 
 const mapRecipesToYear = recipes =>
 	recipes
@@ -16,13 +64,6 @@ const mapRecipesToYear = recipes =>
 			}
 			return years;
 		}, {});
-
-const byRating = (recipeA, recipeB) =>
-	recipeA.last_nom > recipeB.last_nom
-		? 1
-		: recipeB.last_nom > recipeA.last_nom
-		? -1
-		: 0;
 
 const StatsPage = () => {
 	const {allRecipesJson} = useStaticQuery(graphql`
@@ -43,6 +84,7 @@ const StatsPage = () => {
 
 	const recipes = allRecipesJson.nodes;
 	const recipesByYear = mapRecipesToYear(recipes);
+
 	return (
 		<Layout>
 			<SEO title='Statistics' />
@@ -61,46 +103,9 @@ const StatsPage = () => {
 				{Object.keys(recipesByYear)
 					.sort()
 					.reverse()
-					.map(year => {
-						const recipesInYear = recipesByYear[year];
-						return (
-							<section key={year}>
-								<h1 className='f2 lh-copy'>{year}</h1>
-								<p>
-									<span className='b'>{'Total number of recipes made: '}</span>
-									{recipesInYear.length}
-								</p>
-								<p>
-									<span className='b'>{'Average rating given: '}</span>
-									{Math.round(
-										(recipesInYear.reduce(
-											(total, {rating}) => total + rating,
-											0
-										) /
-											recipesInYear.length) *
-											100
-									) / 100}
-								</p>
-								<p>
-									<span className='b'>{'Number of 10s given: '}</span>
-									{recipesInYear.filter(recipe => recipe.rating === 10).length}
-								</p>
-								<p>
-									<span className='b'>{'Top three recipes: '}</span>
-								</p>
-								<ol>
-									{recipesInYear
-										.sort(byRating)
-										.slice(0, 3)
-										.map(recipe => (
-											<li
-												key={recipe.slug}
-											>{`${recipe.title} - ${recipe.rating}/10`}</li>
-										))}
-								</ol>
-							</section>
-						);
-					})}
+					.map(year => (
+						<YearlyStats key={year} year={year} recipes={recipesByYear[year]} />
+					))}
 			</div>
 		</Layout>
 	);
