@@ -75,13 +75,13 @@ const Recipe = ({data, pageContext, location}) => {
 			</header>
 			<article className='ph2 ph2-m ph0-l'>
 				<section className='shadow-3 br4 pb2'>
-					{data.allRecipesJson.nodes[0].image && (
+					{data.allLibJson.nodes[0].image && (
 						<Img
 							placeholderClassName='w-100'
 							className='w-100 br4 br--top'
 							style={{height: '25em'}}
 							imgStyle={{height: '25em'}}
-							fluid={data.allRecipesJson.nodes[0].image.childImageSharp.fluid}
+							fluid={data.allLibJson.nodes[0].image.childImageSharp.fluid}
 						/>
 					)}
 					<div className='fr ph2-ns cf'>
@@ -160,7 +160,7 @@ const Recipe = ({data, pageContext, location}) => {
 
 export const query = graphql`
 	query RecipeImage($slug: String) {
-		allRecipesJson(filter: {slug: {eq: $slug}}) {
+		allLibJson(filter: {slug: {eq: $slug}}) {
 			nodes {
 				slug
 				title

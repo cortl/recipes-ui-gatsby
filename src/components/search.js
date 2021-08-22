@@ -24,7 +24,7 @@ const toSearch = ({slug, title, rating}) => ({
 });
 
 const searchFor = (data, text) => {
-	const items = data.allRecipesJson.nodes.map(toSearch);
+	const items = data.allLibJson.nodes.map(toSearch);
 	const fuse = new Fuse(items, FUSE_CONFIG);
 	return fuse.search(text).slice(0, LIMIT);
 };
@@ -35,7 +35,7 @@ export const Search = () => {
 
 	const data = useStaticQuery(graphql`
 		query AllRecipesQuery {
-			allRecipesJson {
+			allLibJson {
 				nodes {
 					slug
 					title

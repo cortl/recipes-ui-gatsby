@@ -25,7 +25,7 @@ const IndexPage = () => {
 	});
 	const data = useStaticQuery(graphql`
 		query TopRecipesQuery {
-			allRecipesJson(sort: {fields: rating, order: DESC}) {
+			allLibJson(sort: {fields: rating, order: DESC}) {
 				nodes {
 					slug
 					title
@@ -49,7 +49,7 @@ const IndexPage = () => {
 				<Search />
 				<div className='w100'>
 					<div className='flex-l flex-wrap-l justify-center-l'>
-						{data.allRecipesJson.nodes.slice(0, shown).map((recipe, i) => (
+						{data.allLibJson.nodes.slice(0, shown).map((recipe, i) => (
 							<Feature key={i} {...recipe} />
 						))}
 					</div>

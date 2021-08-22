@@ -40,7 +40,7 @@ module.exports = {
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				path: `${__dirname}/node_modules/@cortl/recipes/recipes`,
+				path: `${__dirname}/node_modules/@cortl/recipes/lib`,
 			},
 		},
 	],

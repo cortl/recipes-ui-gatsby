@@ -1,7 +1,7 @@
 exports.createPages = async function ({actions, graphql}) {
-  const {data} = await graphql(`
+	const {data} = await graphql(`
 		{
-			allRecipesJson {
+			allLibJson {
 				nodes {
 					instructions
 					ingredients {
@@ -24,7 +24,7 @@ exports.createPages = async function ({actions, graphql}) {
 		}
 	`);
 
-	const recipes = data.allRecipesJson.nodes
+	const recipes = data.allLibJson.nodes
 		.filter(node => Boolean(node.slug))
 		.filter(node => node.ingredients.length);
 
@@ -32,7 +32,7 @@ exports.createPages = async function ({actions, graphql}) {
 		actions.createPage({
 			path: `recipes/${node.slug}`,
 			component: require.resolve(`./src/templates/recipe.js`),
-			context: { ...node },
+			context: {...node},
 		});
 	});
 };

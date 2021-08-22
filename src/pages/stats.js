@@ -66,9 +66,9 @@ const mapRecipesToYear = recipes =>
 		}, {});
 
 const StatsPage = () => {
-	const {allRecipesJson} = useStaticQuery(graphql`
+	const {allLibJson} = useStaticQuery(graphql`
 		query StatsRecipesQuery {
-			allRecipesJson {
+			allLibJson {
 				nodes {
 					slug
 					title
@@ -82,7 +82,7 @@ const StatsPage = () => {
 		}
 	`);
 
-	const recipes = allRecipesJson.nodes;
+	const recipes = allLibJson.nodes;
 	const recipesByYear = mapRecipesToYear(recipes);
 
 	return (
