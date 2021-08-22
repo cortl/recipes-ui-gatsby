@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: npm install
+          command: npm ci
       - run:
           name: Gatsby Build
           command: ./node_modules/.bin/gatsby build
