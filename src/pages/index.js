@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useStaticQuery, graphql} from 'gatsby';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import {Search} from '../components/search';
 import {Feature} from '../components/feature';
 
@@ -44,7 +44,7 @@ const IndexPage = () => {
 
 	return (
 		<Layout>
-			<SEO title='Home' />
+			<Seo title='Home' />
 			<div className='mw-100'>
 				<Search />
 				<div className='w100'>

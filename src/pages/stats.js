@@ -2,19 +2,19 @@ import React from 'react';
 import {useStaticQuery, graphql, Link} from 'gatsby';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 
 const byRating = (recipeA, recipeB) =>
 	recipeB.rating > recipeA.rating
 		? 1
 		: recipeA.rating > recipeB.rating
-		? -1
-		: 0;
+			? -1
+			: 0;
 
 const calculateAverageFromField = (objects, field) =>
 	Math.round(
 		(objects.reduce((total, obj) => total + obj[field], 0) / objects.length) *
-			100
+		100
 	) / 100;
 
 const YearlyStats = ({year, recipes}) => {
@@ -87,7 +87,7 @@ const StatsPage = () => {
 
 	return (
 		<Layout>
-			<SEO title='Statistics' />
+			<Seo title='Statistics' />
 			<div className='w-90 center'>
 				<section>
 					<h1 className='f2 lh-copy'>{'Overall'}</h1>

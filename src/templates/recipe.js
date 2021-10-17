@@ -4,7 +4,7 @@ import Img from 'gatsby-image';
 
 import 'tachyons-sass/tachyons.scss';
 
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 
 const ingredients = ({ingredients}) =>
 	ingredients.map((ingredientSet, categoryIndex) => (
@@ -69,7 +69,7 @@ const instructions = ({instructions}) => (
 const Recipe = ({data, pageContext, location}) => {
 	return (
 		<div className='helvetica center mw8'>
-			<SEO title={pageContext.title} />
+			<Seo title={pageContext.title} />
 			<header className='f1 lh-solid fw8 pb4 pt4 tc'>
 				{pageContext.title}
 			</header>
