@@ -1,3 +1,5 @@
+# Deprecated! This project has been replaced by [recipes-ui](https://github.com/cortl/recipes-ui)
+
 # Recipes-UI
 
 ## Description
